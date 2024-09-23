@@ -1,0 +1,9 @@
+<header class="flex items-center shadow-lg py-2 px-2 mb-10">
+  <% if user_signed_in? %>
+    <div class="font-bold mr-3">
+      <%= current_user.email %>
+    </div>
+    <%= button_to "Sign out", destroy_user_session_path, method: :delete,
+      class: "rounded-md py-1 px-3 border-solid border-[1px] border-black block" %>
+  <% end %>
+</header>
