@@ -25,6 +25,11 @@ class DiariesController < ApplicationController
 
     respond_to do |format|
       if @diary.save
+        if current_user.my_line_user&.uid
+          text =  "#{@diary.written_on.strftime("%Y/%m/%d(%a)")} #{@diary.content}"
+          MyLineMessaging.push_text_message(uid: current_user.my_line_user.uid, text:)
+        end
+
         format.html { redirect_to @diary, notice: "Diary was successfully created." }
         format.json { render :show, status: :created, location: @diary }
       else
