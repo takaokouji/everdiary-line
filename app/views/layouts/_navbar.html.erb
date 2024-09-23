@@ -3,6 +3,14 @@
     <div class="font-bold mr-3">
       <%= current_user.email %>
     </div>
+    <% if current_user.my_line_user %>
+      <div class="mr-3">
+        LINE Linked
+      </div>
+    <% else %>
+      <%= button_to "LINE Login", my_line_user_line_omniauth_authorize_path, data: {turbo: "false"},
+        class: "rounded-md py-1 px-3 border-solid border-[1px] border-black block mr-3" %>
+    <% end %>
     <%= button_to "Sign out", destroy_user_session_path, method: :delete,
       class: "rounded-md py-1 px-3 border-solid border-[1px] border-black block" %>
   <% end %>

@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :diaries, dependent: :destroy
+  has_one :my_line_user, dependent: :destroy
 end

@@ -61,3 +61,7 @@ end
 gem "tailwindcss-rails", "~> 2.7"
 
 gem "devise", "~> 4.9"
+
+gem "omniauth-line", "~> 0.1.0"
+gem "omniauth-rails_csrf_protection", "~> 1.0"
+gem "dotenv", "~> 3.1"
