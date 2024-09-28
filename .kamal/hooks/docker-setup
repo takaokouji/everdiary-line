@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+hosts = ENV["KAMAL_HOSTS"].split(",")
+
+user = "ubuntu"
+
+hosts.each do |ip|
+  destination = "#{user}@#{ip}"
+  puts "Add \"#{user}\" to the docker group on #{destination}"
+  `ssh #{destination} sudo usermod -aG docker #{user}`
+end
