@@ -39,7 +39,7 @@ builder:
 # Inject ENV variables into containers (secrets come from .kamal/secrets).
 env:
   clear:
-    DB_HOST: 127.0.0.1
+    DB_HOST: everdiary-db
   secret:
     - RAILS_MASTER_KEY
 
