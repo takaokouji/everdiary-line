@@ -51,5 +51,4 @@ test:
 production:
   <<: *default
   database: everdiary_production
-  username: everdiary
   password: <%= ENV["EVERDIARY_DATABASE_PASSWORD"] %>
