@@ -51,5 +51,4 @@ test:
 production:
   <<: *default
   database: everdiary_production
-  port: 3306
-  password: "<%= ENV["EVERDIARY_DATABASE_PASSWORD"] %>"
+  password: "<%= ENV["MYSQL_ROOT_PASSWORD"] %>"
