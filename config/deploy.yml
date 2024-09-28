@@ -9,7 +9,17 @@ servers:
   web:
     hosts:
       - 13.112.62.67
-    cmd: bin/rails server
+    cmd: ./bin/rails server
+    env:
+      clear:
+        DB_HOST: everdiary-db
+      secret:
+        - LINE_KEY
+        - LINE_SECRET
+        - LINE_CHANNEL_SECRET
+        - LINE_CHANNEL_TOKEN
+        - MYSQL_ROOT_PASSWORD
+        - RAILS_MASTER_KEY
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -37,11 +47,6 @@ builder:
   arch: arm64
 
 # Inject ENV variables into containers (secrets come from .kamal/secrets).
-env:
-  clear:
-    DB_HOST: everdiary-db
-  secret:
-    - RAILS_MASTER_KEY
 
 # Aliases are triggered with "bin/kamal <alias>". You can overwrite arguments on invocation:
 # "bin/kamal logs -r job" will tail logs from the first server in the job section.
