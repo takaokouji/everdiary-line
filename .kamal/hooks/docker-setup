@@ -9,7 +9,4 @@ hosts.each do |ip|
   destination = "#{user}@#{ip}"
   puts "Add \"#{user}\" to the docker group on #{destination}"
   `ssh #{destination} sudo usermod -aG docker #{user}`
-
-  puts "Creating a Docker network \"#{network}\" on #{destination}"
-  `ssh #{destination} docker network create -d bridge #{network}`
 end
