@@ -1,13 +1,13 @@
 # Name of your application. Used to uniquely configure containers.
-service: my-app
+service: everdiary
 
 # Name of the container image.
-image: my-user/my-app
+image: takaokouji/everdiary
 
 # Deploy to these servers.
 servers:
   web:
-    - 192.168.0.1
+    - 13.112.62.67
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -17,13 +17,13 @@ servers:
 # Set ssl: false if using something like Cloudflare to terminate SSL (but keep host!).
 proxy:
   ssl: true
-  host: app.example.com
+  host: everdiary.smalruby.app
 
 # Credentials for your image host.
 registry:
   # Specify the registry server, if you're not using Docker Hub
   # server: registry.digitalocean.com / ghcr.io / ...
-  username: my-user
+  username: takaokouji
 
   # Always use an access token rather than real password (pulled from .kamal/secrets).
   password:
@@ -31,7 +31,7 @@ registry:
 
 # Configure builder setup.
 builder:
-  arch: amd64
+  arch: arm64
 
 # Inject ENV variables into containers (secrets come from .kamal/secrets).
 #
@@ -49,8 +49,8 @@ builder:
 
 # Use a different ssh user than root
 #
-# ssh:
-#   user: app
+ssh:
+  user: ubuntu
 
 # Use a persistent storage volume.
 #
@@ -71,21 +71,22 @@ builder:
 
 # Use accessory services (secrets come from .kamal/secrets).
 #
-# accessories:
-#   db:
-#     image: mysql:8.0
-#     host: 192.168.0.2
-#     port: 3306
-#     env:
-#       clear:
-#         MYSQL_ROOT_HOST: '%'
-#       secret:
-#         - MYSQL_ROOT_PASSWORD
-#     files:
-#       - config/mysql/production.cnf:/etc/mysql/my.cnf
-#       - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
-#     directories:
-#       - data:/var/lib/mysql
+accessories:
+  db:
+    image: mysql/mysql-server:8.0
+    host: 13.112.62.67
+    port: 3306
+    env:
+      clear:
+        MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+        MYSQL_ROOT_HOST: '%'
+      secret:
+        - MYSQL_ROOT_PASSWORD
+    files:
+      - config/mysql/production.cnf:/etc/mysql/my.cnf
+      - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
+    directories:
+      - mysql-data:/var/lib/mysql
 #   redis:
 #     image: redis:7.0
 #     host: 192.168.0.2
