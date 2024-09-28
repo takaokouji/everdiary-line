@@ -7,7 +7,9 @@ image: takaokouji/everdiary
 # Deploy to these servers.
 servers:
   web:
-    - 13.112.62.67
+    hosts:
+      - 13.112.62.67
+    cmd: bin/rails server
   # job:
   #   hosts:
   #     - 192.168.0.1
@@ -18,6 +20,7 @@ servers:
 proxy:
   ssl: true
   host: everdiary.smalruby.app
+  app_port: 3000
 
 # Credentials for your image host.
 registry:
@@ -34,12 +37,11 @@ builder:
   arch: arm64
 
 # Inject ENV variables into containers (secrets come from .kamal/secrets).
-#
-# env:
-#   clear:
-#     DB_HOST: 192.168.0.2
-#   secret:
-#     - RAILS_MASTER_KEY
+env:
+  clear:
+    DB_HOST: 127.0.0.1
+  secret:
+    - RAILS_MASTER_KEY
 
 # Aliases are triggered with "bin/kamal <alias>". You can overwrite arguments on invocation:
 # "bin/kamal logs -r job" will tail logs from the first server in the job section.
@@ -54,9 +56,8 @@ ssh:
   keys: [ "~/.ssh/everdiary.pem" ]
 
 # Use a persistent storage volume.
-#
-# volumes:
-#   - "app_storage:/app/storage"
+volumes:
+  - "app_storage:/app/storage"
 
 # Bridge fingerprinted assets, like JS and CSS, between versions to avoid
 # hitting 404 on in-flight requests. Combines all files from new and old
@@ -71,11 +72,11 @@ ssh:
 #   wait: 2
 
 # Use accessory services (secrets come from .kamal/secrets).
-#
 accessories:
   db:
-    image: mysql/mysql-server:8.0
-    host: 13.112.62.67
+    image: mysql:8.0
+    roles:
+      - web
     port: 3306
     env:
       clear:
