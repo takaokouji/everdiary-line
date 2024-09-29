@@ -42,9 +42,6 @@ builder:
 
 ssh:
   user: ubuntu
-  keys:
-    - "~/.ssh/everdiary.pem"
-    - ".ssh/everdiary.pem"
 
 # volumes:
 #  - "app_storage:/app/storage"
