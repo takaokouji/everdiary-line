@@ -42,10 +42,12 @@ builder:
 
 ssh:
   user: ubuntu
-  keys: [ "~/.ssh/everdiary.pem" ]
+  keys:
+    - "~/.ssh/everdiary.pem"
+    - ".ssh/everdiary.pem"
 
-volumes:
-  - "app_storage:/app/storage"
+# volumes:
+#  - "app_storage:/app/storage"
 
 # asset_path: /app/public/assets
 
@@ -55,7 +57,7 @@ volumes:
 
 accessories:
   db:
-    image: mysql:8.0
+    image: mysql/mysql-server:8.0
     roles:
       - web
     port: 3306
@@ -70,4 +72,3 @@ accessories:
       - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
     directories:
       - mysql-data:/var/lib/mysql
-
