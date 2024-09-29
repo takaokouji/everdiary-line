@@ -51,4 +51,5 @@ test:
 production:
   <<: *default
   database: everdiary_production
-  password: "<%= ENV["MYSQL_ROOT_PASSWORD"] %>"
+  username: root
+  password: <%= ENV["MYSQL_ROOT_PASSWORD"] %>
