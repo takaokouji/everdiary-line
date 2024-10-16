@@ -66,6 +66,6 @@ gem "dotenv", "~> 3.1"
 
 gem "line-bot-api", "~> 1.29"
 
-gem "tailwindcss-rails", "~> 2.7", :groups => [:development, :test]
+gem "tailwindcss-rails", "~> 3.0", :groups => [:development, :test]
 
 gem "kamal", "~> 2.0", :group => :development
